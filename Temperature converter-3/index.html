@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Temperature Converter</title>
+    <style>
+      /* CSS styles for the converter */
+      #converter {
+        color:white;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #0d02315c;
+        border: 1px solid #22066529;
+        border-radius: 4px;
+      }
+
+      h1 {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 0;
+      }
+      body {
+        background-image:url("temp_image2.jpeg");
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        color: rgb(16, 14, 14);
+        border: 1px solid #170644e7;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      button[type="submit"] {
+        background-color: #04073e7d;
+        color: #f4f7fab1;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .result {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      label{
+        color:white;
+      }
+    </style>
+  </head>
+  <body>
+    <br><br><br><br><br><br><br>
+    <div id="converter">
+      
+
+      <h1>Temperature Converter</h1>
+      
+      <form id="temp-form">
+        <label>Celsius:</label>
+        <input type="number" id="celsius-input" />
+        <label>Fahrenheit:</label>
+        <input type="number" id="fahrenheit-input" />
+        <label>Kelvin:</label>
+        <input type="number" id="kelvin-input" />
+        <br><br>
+        <button type="submit">Convert</button>
+      </form>
+      <div class="result" id="result"></div>
+    </div>
+
+    <script>
+      const tempForm = document.querySelector("#temp-form");
+      const celsiusInput = document.querySelector("#celsius-input");
+      const fahrenheitInput = document.querySelector("#fahrenheit-input");
+      const kelvinInput = document.querySelector("#kelvin-input");
+      const result = document.querySelector("#result");
+
+      tempForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let celsius = parseFloat(celsiusInput.value);
+        let fahrenheit = parseFloat(fahrenheitInput.value);
+        let kelvin = parseFloat(kelvinInput.value);
+
+        if (!isNaN(celsius)) {
+          fahrenheit = (celsius * 9) / 5 + 32;
+          kelvin = celsius + 273.15;
+        } else if (!isNaN(fahrenheit)) {
+          celsius = ((fahrenheit - 32) * 5) / 9;
+          kelvin = ((fahrenheit - 32) * 5) / 9 + 273.15;
+        } else if (!isNaN(kelvin)) {
+          celsius = kelvin - 273.15;
+          fahrenheit = ((kelvin - 273.15) * 9) / 5 + 32;
+        }
+
+        result.innerHTML = `Celsius: ${celsius.toFixed(
+          2
+        )}&deg;C<br>Fahrenheit: ${fahrenheit.toFixed(
+          2
+        )}&deg;F<br>Kelvin: ${kelvin.toFixed(2)}K`;
+      });
+    </script>
+  </body>
+</html>
